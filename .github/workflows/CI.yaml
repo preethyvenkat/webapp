@@ -77,9 +77,9 @@ jobs:
       uses:  azure/aci-deploy@v1
       with:
          resource-group: ezlink-test_group
-         dns-name-label: webapp
-         image: contoso.azurecr.io/webapp:${{ github.sha }}
+         dns-name-label: ezlink-test_group-${{ github.run_number }}
+         image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/webapp:${{ github.sha }}
          registry-username: ${{ secrets.REGISTRY_USERNAME }}
          registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-         name:  webavengers-container
+         name:  springboot-webapp
          location: East US
