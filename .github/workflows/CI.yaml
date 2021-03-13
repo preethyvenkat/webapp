@@ -22,10 +22,10 @@ jobs:
     - name: Maven Verify
       run: mvn -B clean verify -Pintegration-test
     - name: Archive jar
-        uses: actions/upload-artifact@v2
-        with:
-          name: webapp-jar
-          path: target/*.jar
+      uses: actions/upload-artifact@v2
+      with:
+        name: webapp-jar
+        path: target/*.jar
 
   sonar:
     name: Test - SonarCloud Scan
