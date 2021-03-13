@@ -21,6 +21,11 @@ jobs:
       run: mvn -B clean package -DskipTests
     - name: Maven Verify
       run: mvn -B clean verify -Pintegration-test
+    - name: Archive jar
+        uses: actions/upload-artifact@v2
+        with:
+          name: webapp-jar
+          path: target/*.jar
 
   sonar:
     name: Test - SonarCloud Scan
@@ -45,6 +50,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+
+    - name: Download jar
+      uses: actions/download-artifact@v2
+      with:
+        name: webapp-jar
+
     - name: 'Build and push image'
       uses: azure/docker-login@v1
       with:
