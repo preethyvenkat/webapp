@@ -77,7 +77,7 @@ jobs:
       uses:  azure/aci-deploy@v1
       with:
          resource-group: ezlink-test_group
-         dns-name-label: ezlink-test_group-${{ github.run_number }}
+         dns-name-label: webapp${{ github.run_number }}
          image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/webapp:${{ github.sha }}
          registry-username: ${{ secrets.REGISTRY_USERNAME }}
          registry-password: ${{ secrets.REGISTRY_PASSWORD }}
