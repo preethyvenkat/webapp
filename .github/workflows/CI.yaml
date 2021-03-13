@@ -37,9 +37,11 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+
   artifact:
     name:  Publish - Image
     runs-on: ubuntu-18.04
+    needs: [test, sonar]
 
     steps:
     - name: 'Build and push image'
@@ -49,5 +51,6 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
-            docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/webapp:${{ github.sha }}
-            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/webapp:${{ github.sha }}
+        docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/webapp:${{ github.sha }}
+        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/webapp:${{ github.sha }}
+
