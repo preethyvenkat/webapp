@@ -68,3 +68,12 @@ jobs:
         docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/webapp:${{ github.sha }}
         docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/webapp:${{ github.sha }}
 
+    - name: 'Deploy to Azure Container Instances'
+      uses:  azure/aci-deploy@v1
+      with:
+         resource-group: ezlink-test_group
+         image: contoso.azurecr.io/webapp:${{ github.sha }}
+         registry-username: ${{ secrets.REGISTRY_USERNAME }}
+         registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+         name:  webavengers-container
+         location: East US
